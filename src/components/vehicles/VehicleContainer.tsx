@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { fetchAllVehicles, fetchVehiclesFilteredByBrand } from "../services/VehicleService";
+import { fetchAllVehicles } from "../services/VehicleService";
 import VehicleGridList from "./VehicleGridList";
 import VehicleHeader from "./VehicleHeader";
 import { useSelector } from "react-redux";
@@ -29,16 +29,7 @@ const VehicleContainer: FC = () => {
         console.error(response.data);
       }
     }
-
-    const fetchAndSetBrandFilteredVehicles = async () =>{
-      const response = await fetchVehiclesFilteredByBrand(brand);
-      if( response.success ){
-        console.log(brand);
-        setVehicles(response.data);
-      }else{
-        console.error(response.data);
-      }
-    }
+    
 
     // Use effect to filter the vehicles by brand
     useEffect(()=>{

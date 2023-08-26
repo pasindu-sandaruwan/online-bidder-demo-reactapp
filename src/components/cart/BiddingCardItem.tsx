@@ -24,6 +24,7 @@ const BiddingCartItem = (props: Props) => {
                     <Grid container spacing={1}>
                         <Grid item md={5}>
                             <img
+                                alt = "vehicle"
                                 src={props.vehicle.details.image}
                                 width={"200"}
                                 style={{
