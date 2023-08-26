@@ -2,13 +2,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { onChangeVehicleBrandFilter } from "../../store/VehicleFilterSlice";
 
 const brandList: string[] = ["Volkswagen", "Audi", "Ford", "Mercedes", "BMW"];
 
 const VehicleBrandSelector = () => {
+    const dispatch = useDispatch();
     const [selectedBrand, setSelectedBrand] = useState("");
     const handleChange = (e : any) => {
         setSelectedBrand(e.target.value);
+        dispatch(onChangeVehicleBrandFilter(e.target.value));
     };
 
     return (

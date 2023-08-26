@@ -1,24 +1,27 @@
 import { FC, useEffect, useState } from "react";
-import { fetchAllVehicles } from "../services/VehicleService";
+import { fetchAllVehicles, fetchVehiclesFilteredByBrand } from "../services/VehicleService";
 import VehicleGridList from "./VehicleGridList";
 import VehicleHeader from "./VehicleHeader";
+import { useSelector } from "react-redux";
 
 const VehicleContainer: FC = () => {
     const [vehicles, setVehicles] = useState([]);
+    const brand = useSelector((state:any)=>state.vehicleFilter);
 
+    // Use effect to filter all the items
     useEffect(()=>{
       let isUnmounted  = false;
 
       if( !isUnmounted ){
-        fetchAndSetVehicles();
+        fetchAndSetAllVehicles();
       }
 
       return () =>{
         isUnmounted = true;
       }
     },[])
-
-    const fetchAndSetVehicles = async () =>{
+  
+    const fetchAndSetAllVehicles = async () =>{
       const response = await fetchAllVehicles();
       if( response.success ){
         setVehicles(response.data);
@@ -26,6 +29,29 @@ const VehicleContainer: FC = () => {
         console.error(response.data);
       }
     }
+
+    const fetchAndSetBrandFilteredVehicles = async () =>{
+      const response = await fetchVehiclesFilteredByBrand(brand);
+      if( response.success ){
+        console.log(brand);
+        setVehicles(response.data);
+      }else{
+        console.error(response.data);
+      }
+    }
+
+    // Use effect to filter the vehicles by brand
+    useEffect(()=>{
+      // let isUnmounted  = false;
+
+      // if( !isUnmounted && brand !== "" ){
+      //   fetchAndSetBrandFilteredVehicles();
+      // }
+
+      // return () =>{
+      //   isUnmounted = true;
+      // }
+    },[brand])
 
     return(
        <div>
