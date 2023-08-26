@@ -12,6 +12,8 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import { addItemToBiddingCart } from "../../store/BiddingCartSlice";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
 type Props = {
     vehicle: IVehicle;
@@ -19,10 +21,15 @@ type Props = {
 
 const VehicleCardItem = (props: Props) => {
     const dispatch = useDispatch();
+    const [bidPrice, setBidPrice] = useState("");
 
-    const onAddItemtoCart = () =>{
-        dispatch(addItemToBiddingCart(props.vehicle));
-    }
+    const onAddItemtoCart = () => {
+        const updatedItem : IVehicle = {...props.vehicle};
+        const parsedPrice = parseInt(bidPrice);
+        updatedItem.details.price = isNaN(parsedPrice)  ? 0 : parsedPrice;
+
+        dispatch(addItemToBiddingCart(updatedItem));
+    };
     return (
         <Card
             style={{
@@ -51,8 +58,8 @@ const VehicleCardItem = (props: Props) => {
                                 height: 20,
                                 backgroundColor: props.vehicle.details.color,
                             }}
-                            style = {{
-                                float : "right"
+                            style={{
+                                float: "right",
                             }}
                         />
                     </Grid>
@@ -95,9 +102,17 @@ const VehicleCardItem = (props: Props) => {
                 </Grid>
             </CardContent>
             <CardActions disableSpacing>
+                <TextField
+                    id="outlined-number"
+                    label="Your bidding price"
+                    type="number"
+                    value = {bidPrice}
+                    onChange={(e)=>setBidPrice(e.target.value)}
+                />
                 <Tooltip title="Add to bidding cart">
-                    <IconButton onClick={()=>onAddItemtoCart()} aria-label="add to favorites">
+                    <IconButton onClick={() => onAddItemtoCart()} aria-label="add to favorites">
                         <MonetizationOnIcon />
+
                         <Typography
                             color="primary"
                             variant="body2"

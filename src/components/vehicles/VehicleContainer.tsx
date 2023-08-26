@@ -7,14 +7,14 @@ const VehicleContainer: FC = () => {
     const [vehicles, setVehicles] = useState([]);
 
     useEffect(()=>{
-      let unmounted  = false;
+      let isUnmounted  = false;
 
-      if( !unmounted ){
+      if( !isUnmounted ){
         fetchAndSetVehicles();
       }
 
       return () =>{
-        unmounted = true;
+        isUnmounted = true;
       }
     },[])
 
