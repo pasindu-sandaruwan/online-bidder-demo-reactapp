@@ -1,10 +1,9 @@
 import { FC } from "react";
+import VehicleContainer from "../components/vehicles/VehicleContainer";
 
 const Vechicles: FC = () => {
     return(
-       <div>
-        Hello from the vehicles 
-       </div>
+       <VehicleContainer/>
     )
 };
 

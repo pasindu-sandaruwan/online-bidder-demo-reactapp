@@ -1,8 +1,12 @@
 import "./App.css";
+import ContentLayout from "./components/layout/ContentLayout";
+import Vechicles from "./pages/Vehicles";
 
 function App() {
     return (
-        <div> Hello </div>
+        <ContentLayout>
+            <Vechicles/>
+       </ContentLayout>
     );
 }
 

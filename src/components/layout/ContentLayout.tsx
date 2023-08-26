@@ -7,9 +7,11 @@ type Props = {
 };
 const ContentLayout = (props: Props) => {
     return (
-        <Container maxWidth="sm">
-            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }} />
-            {props.children}
+        <Container maxWidth="lg">
+            {/* <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }} /> */}
+            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh", marginTop: 10 }}>
+                {props.children}
+            </Box>
         </Container>
     );
 };
