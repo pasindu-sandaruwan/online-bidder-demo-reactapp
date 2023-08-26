@@ -1,25 +1,25 @@
 import { FC, useEffect, useState } from "react";
 import { fetchAllVehicles } from "../services/VehicleService";
+import VehicleGridList from "./VehicleGridList";
 
 const VehicleContainer: FC = () => {
     const [vehicles, setVehicles] = useState([]);
 
     useEffect(()=>{
-      let mounted = true;
+      let unmounted  = false;
 
-      if( mounted ){
+      if( !unmounted ){
         fetchAndSetVehicles();
       }
 
       return () =>{
-        mounted = false;
+        unmounted = true;
       }
     },[])
 
     const fetchAndSetVehicles = async () =>{
       const response = await fetchAllVehicles();
       if( response.success ){
-        console.log(response.data);
         setVehicles(response.data);
       }else{
         console.error(response.data);
@@ -28,7 +28,9 @@ const VehicleContainer: FC = () => {
 
     return(
        <div>
-         Vehicle Continer rendering 
+        <VehicleGridList 
+          vehicles={vehicles}
+        />
        </div>
     )
 };

@@ -4,7 +4,6 @@ import { getApi } from "../../utils/axios";
 const API_PREFIX = "/vehicles";
 
 export const fetchAllVehicles = async () =>{
-    console.log("loading vehicles")
     return await getApi()
         .get(`${API_PREFIX}`)
         .then((res)=>{
