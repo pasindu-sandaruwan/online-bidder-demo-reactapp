@@ -1,13 +1,20 @@
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onShowBiddingCart } from "../../store/BiddingCartSlice";
 
 const BiddingCartBadge = () => {
+    const dispatch = useDispatch();
     const cartItemCount = useSelector((state : any)=> state.biddingCart.items.length );
+
+    const onClickCart = () =>{
+        dispatch(onShowBiddingCart());
+    }
+
     return (
         <IconButton
-            onClick={() => alert("TODO : Open the list modal")}
+            onClick={() => onClickCart()}
             style={{
                 marginBottom: 10,
                 marginRight: 10,

@@ -4,7 +4,8 @@ import { IVehicle } from "../components/vehicles/IVehicleModel";
 
 const cartInitialSlice : IBiddingCart = {
     items : [],
-    total : 0
+    total : 0,
+    showCart : false
 };
 
 const BiddingCartSlice = createSlice({
@@ -16,10 +17,13 @@ const BiddingCartSlice = createSlice({
             state.items.push(item);
 
             state.total += item.details.price;
+        },
+        onShowBiddingCart(state){
+            state.showCart = true;
         }
     }
 })
 
-export const {addItemToBiddingCart} = BiddingCartSlice.actions;
+export const {addItemToBiddingCart, onShowBiddingCart} = BiddingCartSlice.actions;
 
 export default BiddingCartSlice;

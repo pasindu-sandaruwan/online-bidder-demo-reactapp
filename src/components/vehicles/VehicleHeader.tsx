@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
 import BiddingCartBadge from "../cart/BiddingCartBadge";
+import BiddingCartList from "../cart/BiddingCartList";
 
 const VehicleHeader = () => {
     return <Grid container spacing={2}>
@@ -8,6 +9,7 @@ const VehicleHeader = () => {
         </Grid>
         <Grid item md = {4}>
             <BiddingCartBadge/>
+            <BiddingCartList/>
         </Grid>
     </Grid>;
 };

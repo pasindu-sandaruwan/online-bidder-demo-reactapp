@@ -5,12 +5,10 @@ import CloseIcon from "@mui/icons-material/Close";
 // import themeColors from "assets/theme/colors";
 import {
     Box,
-    Card,
     CardContent,
     CardHeader,
     Grid,
     IconButton,
-    makeStyles,
     Modal,
     Paper,
 } from "@mui/material";
@@ -19,7 +17,7 @@ interface Props {
     children: ReactNode;
     show: boolean;
     title: string;
-    hide(): boolean;
+    hide(): void;
 }
 
 const CustomPopup = (props: Props) => {
@@ -27,7 +25,7 @@ const CustomPopup = (props: Props) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    
+
     const handleClose = () => {
         setOpen(false);
         props.hide();
