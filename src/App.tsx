@@ -1,13 +1,11 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Product from "./pages/Product";
 import ContentLayout from "./components/layout/ContentLayout";
+import Vechicles from "./pages/Vehicles";
 
 function App() {
     return (
         <ContentLayout>
-           <Product/>
+            <Vechicles/>
        </ContentLayout>
     );
 }
