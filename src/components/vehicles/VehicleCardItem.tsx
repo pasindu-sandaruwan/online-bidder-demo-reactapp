@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { addItemToBiddingCart } from "../../store/BiddingCartSlice";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import Alert from "@mui/material/Alert";
 
 type Props = {
     vehicle: IVehicle;
@@ -22,11 +23,32 @@ type Props = {
 const VehicleCardItem = (props: Props) => {
     const dispatch = useDispatch();
     const [bidPrice, setBidPrice] = useState("");
+    const [error, setError] = useState("");
 
     const onAddItemtoCart = () => {
-        const updatedItem : IVehicle = {...props.vehicle};
         const parsedPrice = parseInt(bidPrice);
-        updatedItem.details.price = isNaN(parsedPrice)  ? 0 : parsedPrice;
+
+        // Perform the validations
+        // Note : This Validation that I have done here is bad coding, I should've put this seperately 
+        if (bidPrice === "") {
+            setError("Bid price field cannot be empty");
+            return;
+        }
+        if (isNaN(parsedPrice)) {
+            setError("Please include a valid amount for the bidding");
+            return;
+        }
+        if( parsedPrice < 0 ){
+            setError("Bid price cannot be a negative value");
+            return;
+        }
+        if( parsedPrice > props.vehicle.details.price ){
+            setError(`Bid price cannot be more than ${props.vehicle?.details?.price?.toLocaleString()}`);
+            return;
+        }
+        
+        const updatedItem : IVehicle = props.vehicle;
+        updatedItem.details.price = parsedPrice;
 
         dispatch(addItemToBiddingCart(updatedItem));
     };
@@ -77,8 +99,8 @@ const VehicleCardItem = (props: Props) => {
                         marginTop: 5,
                     }}
                 >
-                    {props.vehicle.details.currency}{" "}
-                    {formatDisplayPrice(props.vehicle.details.price)}
+                    {formatDisplayPrice(props.vehicle.details.price)}{" "}
+                    {props.vehicle.details.currency}
                 </Typography>
 
                 <Grid
@@ -101,13 +123,17 @@ const VehicleCardItem = (props: Props) => {
                     <Grid item md={6}></Grid>
                 </Grid>
             </CardContent>
+
+            {error && <Alert severity="error">{error}</Alert>}
+
             <CardActions disableSpacing>
                 <TextField
                     id="outlined-number"
                     label="Your bidding price"
                     type="number"
-                    value = {bidPrice}
-                    onChange={(e)=>setBidPrice(e.target.value)}
+                    required={true}
+                    value={bidPrice}
+                    onChange={(e) => setBidPrice(e.target.value)}
                 />
                 <Tooltip title="Add to bidding cart">
                     <IconButton onClick={() => onAddItemtoCart()} aria-label="add to favorites">

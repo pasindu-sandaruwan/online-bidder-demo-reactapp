@@ -16,7 +16,7 @@ const BiddingCartBadge = () => {
         <IconButton
             onClick={() => onClickCart()}
             style={{
-                marginBottom: 10,
+                marginTop : 24,
                 marginRight: 10,
                 float: "right",
             }}
