@@ -3,12 +3,16 @@ import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
+import BiddingCartSlice from "./BiddingCartSlice";
+import VehicleFilterSlice from "./VehicleFilterSlice";
 
 /*
 * The store of redux 
 */
 
 const reducers = combineReducers({
+  biddingCart : BiddingCartSlice.reducer,
+  vehicleFilter : VehicleFilterSlice.reducer
 });
 
 /*
