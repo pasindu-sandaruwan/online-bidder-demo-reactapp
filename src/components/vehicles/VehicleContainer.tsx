@@ -1,19 +1,20 @@
 import { FC, useEffect, useState } from "react";
 import { fetchAllVehicles } from "../services/VehicleService";
 import VehicleGridList from "./VehicleGridList";
+import VehicleHeader from "./VehicleHeader";
 
 const VehicleContainer: FC = () => {
     const [vehicles, setVehicles] = useState([]);
 
     useEffect(()=>{
-      let unmounted  = false;
+      let isUnmounted  = false;
 
-      if( !unmounted ){
+      if( !isUnmounted ){
         fetchAndSetVehicles();
       }
 
       return () =>{
-        unmounted = true;
+        isUnmounted = true;
       }
     },[])
 
@@ -28,6 +29,7 @@ const VehicleContainer: FC = () => {
 
     return(
        <div>
+        <VehicleHeader/>
         <VehicleGridList 
           vehicles={vehicles}
         />
