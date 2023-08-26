@@ -3,6 +3,9 @@
 
 ### Deployed Link: http://elasticbeanstalk-ap-south-1-213411289956.s3-website.ap-south-1.amazonaws.com/
 
+## Styling
+###  Styling docs reference: [Material UI](https://mui.com/material-ui/getting-started/)
+
 ## Execution Scripts
 #### Prerequisites
 Install **typescript** as a global dependency using this command.
