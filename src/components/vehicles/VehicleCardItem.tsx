@@ -5,17 +5,24 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import { formatDisplayPrice } from "../../utils/utilityFunctions";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import Box from "@mui/material/Box";
+import { useDispatch } from "react-redux";
+import { addItemToBiddingCart } from "../../store/BiddingCartSlice";
 
 type Props = {
     vehicle: IVehicle;
 };
 
 const VehicleCardItem = (props: Props) => {
+    const dispatch = useDispatch();
+
+    const onAddItemtoCart = () =>{
+        dispatch(addItemToBiddingCart(props.vehicle));
+    }
     return (
         <Card
             style={{
@@ -89,7 +96,7 @@ const VehicleCardItem = (props: Props) => {
             </CardContent>
             <CardActions disableSpacing>
                 <Tooltip title="Add to bidding cart">
-                    <IconButton aria-label="add to favorites">
+                    <IconButton onClick={()=>onAddItemtoCart()} aria-label="add to favorites">
                         <MonetizationOnIcon />
                         <Typography
                             color="primary"
