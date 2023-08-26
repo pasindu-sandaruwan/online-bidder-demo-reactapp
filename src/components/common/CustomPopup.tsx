@@ -1,8 +1,6 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-// @material-ui/core components
 
-// import themeColors from "assets/theme/colors";
 import {
     Box,
     CardContent,
@@ -21,11 +19,8 @@ interface Props {
 }
 
 const CustomPopup = (props: Props) => {
-    //const classes = useStyles();
-
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-
+    
     const handleClose = () => {
         setOpen(false);
         props.hide();
@@ -64,7 +59,7 @@ const CustomPopup = (props: Props) => {
                                 subheader={
                                     <Grid container>
                                         <Grid item xs={6}>
-                                            <Box component={"h5"} style={{ whiteSpace: "nowrap" }}>
+                                            <Box component={"h3"} style={{ whiteSpace: "nowrap" }}>
                                                 <strong> {props.title} </strong>
                                             </Box>
                                         </Grid>

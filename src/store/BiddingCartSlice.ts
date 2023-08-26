@@ -20,10 +20,13 @@ const BiddingCartSlice = createSlice({
         },
         onShowBiddingCart(state){
             state.showCart = true;
+        },
+        onHideBiddingCart(state){
+            state.showCart = false;
         }
     }
 })
 
-export const {addItemToBiddingCart, onShowBiddingCart} = BiddingCartSlice.actions;
+export const {addItemToBiddingCart, onShowBiddingCart, onHideBiddingCart} = BiddingCartSlice.actions;
 
 export default BiddingCartSlice;
